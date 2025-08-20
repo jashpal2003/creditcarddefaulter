@@ -8,6 +8,33 @@ from training_Validation_Insertion import train_validation
 #import flask_monitoringdashboard as dashboard
 from predictFromModel import prediction
 
+# Ensure required runtime folders and log files exist (prevents Errno 2 on deploy)
+_required_dirs = [
+    "Prediction_Logs",
+    "Prediction_Output_File",
+    "Prediction_Batch_files",
+    "Prediction_Raw_Files_Validated",
+    os.path.join("Prediction_Raw_Files_Validated", "Good_Raw"),
+    os.path.join("Prediction_Raw_Files_Validated", "Bad_Raw"),
+]
+for _d in _required_dirs:
+    try:
+        os.makedirs(_d, exist_ok=True)
+    except Exception:
+        pass
+
+# Create commonly used empty log files if missing
+_log_files = [
+    os.path.join("Prediction_Logs", "Prediction_Log.txt"),
+    os.path.join("Prediction_Logs", "GeneralLog.txt"),
+    os.path.join("Prediction_Logs", "ExportToCsv.txt"),
+]
+for _f in _log_files:
+    try:
+        open(_f, "a", encoding="utf-8").close()
+    except Exception:
+        pass
+
 os.putenv('LANG', 'en_US.UTF-8')
 os.putenv('LC_ALL', 'en_US.UTF-8')
 
