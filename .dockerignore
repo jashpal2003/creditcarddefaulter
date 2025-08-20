@@ -1,0 +1,12 @@
+venv
+__pycache__
+*.pyc
+.idea
+*.db
+Training_Logs
+Prediction_Logs
+TrainingArchiveBadData
+PredictionArchivedBadData
+Training_Batch_Files/*.ipynb
+Prediction_Batch_files/*.ipynb
+node_modules
